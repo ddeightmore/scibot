@@ -341,10 +341,10 @@ def find_rrids(text):
         yield prefix, f'RRID:SAMN{nums.strip()}', f'{a}{b}{nums}', suffix
 
     # fifth round for NCBI Taxonomy
-    regex5 = '(.{0,32})(NCBI)(((\s|:){0,2})((txid|Taxon)(_|:)?))([0-9]{3,8})([^\w].{0,31})'
+    regex5 = '(.{0,32})(NCBI)(((:|(:\s))?)(((t|T)(a)?x((id)|(Id)|(ID))|Taxon)(_|:)?(\s)?))([0-9]{3,8})([^\w].{0,31})'
     matches5 = re.findall(regex5, text)
     for prefix, ncbi, tax, nums, suffix in matches5:
-        yield prefix, f'RRID:NCBITaxon_{nums.strip()}', f'{a}{b}{nums}', suffix
+        yield prefix, f'RRID:NCBITaxon_{nums.strip()}', f'{ncbi}{tax}{nums}', suffix
 
 
 # extract from post
